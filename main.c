@@ -10,6 +10,8 @@ Muñoz Leandro 	Leg. 83393
 
 int main (void){ //Tratemos de comentar todo lo que hagamos
 
+printf("\n\n\t Hola Mundo!\n\n");
 
 return 0;	
 }
+
