@@ -1,9 +1,12 @@
 CC=gcc
 CFLAGS=-Wall
+OBJS = main.o
 
+all: EduLab
 
-main: main.o
+EduLab: $(OBJS)
+
 main.o: main.c
 
 clean: 
-	rm -f main *.o
+	rm -f EduLab *.o
