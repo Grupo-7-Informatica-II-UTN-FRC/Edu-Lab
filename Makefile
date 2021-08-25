@@ -2,6 +2,7 @@ CC=gcc
 CFLAGS=-Wall
 OBJS = main.o
 
+
 all: EduLab
 
 EduLab: $(OBJS)
