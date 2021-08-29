@@ -63,6 +63,7 @@ else{
 
 	printf("\n\t Ingrese su usuario: ");	
 	scanf("%[^\n]s", usuario);					//usuario a buscar
+	system("clear");
 //	printf(" --->%s<---\n\n",usuario);	
 //	printf(" --->%s<---\n\n",datos_1.name);
 
@@ -76,7 +77,7 @@ else{
 		fread( &datos_1,sizeof(datos),1,ptrf);
 //printf("\n\n --->%s<---\n\n",datos_1.name);	
 		if((strcmp(usuario,datos_1.name))==0){
-			printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s\n", datos_1.name, datos_1.inout.in_1, datos_1.inout.in_2, datos_1.inout.in_3, datos_1.inout.in_4, datos_1.inout.out_1, datos_1.inout.out_2, ctime(&datos_1.data_time) );
+			printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s", datos_1.name, datos_1.inout.in_1, datos_1.inout.in_2, datos_1.inout.in_3, datos_1.inout.in_4, datos_1.inout.out_1, datos_1.inout.out_2, ctime(&datos_1.data_time) );
 
 		}
 	}
