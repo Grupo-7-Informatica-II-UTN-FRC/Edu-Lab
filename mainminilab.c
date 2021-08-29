@@ -5,7 +5,7 @@
 
 //uso este main para probar funciones que voy a utilizar en la biblioteca
 int main (int argc, char *argv[]){
-datos datos_1 = {0 ,"lean",{62}};
+datos datos_1 = {0 ,"lean",{29}};
 
 strcpy(datos_1.name, argv[1]);
 //strcpy(datos_1.inout, "5";
