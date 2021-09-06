@@ -37,12 +37,12 @@ struct USUARIO {
    union{                           /*Una union de */
       unsigned char puerto_completo;/*Un byte entero para manejar todo el puerto*/
       struct{
-         unsigned char in_0 : 1;    /*bit a bit para manipular el puerto*/
-         unsigned char in_1 : 1;
+         unsigned char in_1 : 1;    /*bit a bit para manipular el puerto*/
          unsigned char in_2 : 1;
          unsigned char in_3 : 1;
-         unsigned char out_0: 1;
+         unsigned char in_4 : 1;
          unsigned char out_1: 1;
+         unsigned char out_2: 1;
          unsigned char padin: 2;    /*Rellena los espacios vacios para alinear datos: padding*/
        };
     }in_out;
@@ -61,8 +61,8 @@ typedef struct USUARIO user_data;
 
 void bienvenida(void);
 void despedida(void);
-void modo_edulab(user_data * new_user);
-void modo_test(user_data * new_user);
-void modo_minilab(user_data * new_user);
+void modo_edulab(user_data *);
+void modo_test(user_data *);
+void modo_minilab(user_data *);
 
         /*------------- FIN DEL PROTOTIPADO DE FUNCIONES -----------------------*/

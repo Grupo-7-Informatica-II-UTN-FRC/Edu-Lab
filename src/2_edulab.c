@@ -59,6 +59,12 @@
 
       /*---------------- FIN DE LA FUNCION DE DESPEDIDA -------------------*/
 
+
+/* estas implementaciones siguientes hay que comentarlas una vez que
+   esten los correspondientes archivos.c de cada implementacion, por
+   el momento no los comento para que funcione el menu de bienvenida*/
+
+
  void modo_edulab(user_data * new_user){
   }
 
@@ -67,11 +73,11 @@
 
 
 
-/* void modo_test(user_data * new_user){}*//*esta la hace el lean*/
+ void modo_test(user_data * new_user){} /*esta la hace el lean*/
 
 
 
 
 
 
-/* void modo_minilab(user_data * new_user){}*//*esta la hace el ema*/
+ void modo_minilab(user_data * new_user){} /*esta la hace el ema*/
