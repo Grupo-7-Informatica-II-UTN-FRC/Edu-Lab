@@ -67,11 +67,11 @@
 
 
 
- void modo_test(user_data * new_user){}
+/* void modo_test(user_data * new_user){}*//*esta la hace el lean*/
 
 
 
 
 
 
- void modo_minilab(user_data * new_user){}
+/* void modo_minilab(user_data * new_user){}*//*esta la hace el ema*/
