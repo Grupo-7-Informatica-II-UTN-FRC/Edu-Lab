@@ -63,6 +63,6 @@ void bienvenida(void);
 void despedida(void);
 void modo_edulab(user_data * new_user);
 void modo_test(user_data * new_user);
-void modo_minilab(user_data * new_user);
+void modo_minilab(user_data *);
 
         /*------------- FIN DEL PROTOTIPADO DE FUNCIONES -----------------------*/

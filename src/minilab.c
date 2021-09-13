@@ -11,25 +11,8 @@ un archivo de texto (.txt) en el ordenador o PC. El Mini-Lab
 trabajará en este modo como un asistente de ensayos, facilitando 
 las pruebas que el usuario realice en el circuito.
 */
-struct DATOS {     		//Estructura para guardar datos IO
-	time_t data_time;
-	char name[nombre];
-		union{
-			unsigned int io_6 : 6;
-			struct{
-				unsigned int in_1 : 1;
-				unsigned int in_2 : 1;
-				unsigned int in_3 : 1;
-				unsigned int in_4 : 1;
-				unsigned int out_1: 1;
-				unsigned int out_2: 1;
-			};
-		}inout;
-};
 
-typedef struct DATOS datos_usuario; 							//simplificacion para declarar "DATOS"
-
-void guardarDatos(datos_usuario datos_1){ 				 //guarda los datos leidos
+void guardarDatos(user_data * datos_1){ //guarda los datos leidos
 
 FILE *ptrf;
 
@@ -40,7 +23,7 @@ if (( ptrf = fopen ("datos.dat","ab"))==NULL){
 else{
 
 	fseek(ptrf,0,SEEK_END);									//posiciona el puntero al final
-	fwrite(&datos_1,sizeof(datos_usuario),1,ptrf);	//escribe datos en un archivo
+	fwrite(&datos_1,sizeof(user_data),1,ptrf);	//escribe datos en un archivo
 
 	fclose (ptrf);													//cierra archivo
 
@@ -51,7 +34,7 @@ else{
 
 void leerDatos(){											//lee los datos guardados
 
-char usuario_1[15] ;										//usuario a buscar
+char usuario_1[TAM_NAME] ;										//usuario a buscar
 datos_usuario datos_1 = {0, "", {0}};					//estructura donde se guarda el archivo
 
 FILE *ptrf;
@@ -75,10 +58,10 @@ else{
 
 	while(!feof(ptrf)){
 	
-		fread( &datos_1,sizeof(datos_usuario),1,ptrf);
+		fread( &datos_1,sizeof(user_data),1,ptrf);
 //printf("\n\n --->%s<---\n\n",datos_1.name);	
-		if(((strcmp(usuario_1,datos_1.name))==0)||((strcmp(usuario_1,"todos"))==0)){
-			printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s", datos_1.name, datos_1.inout.in_1, datos_1.inout.in_2, datos_1.inout.in_3, datos_1.inout.in_4, datos_1.inout.out_1, datos_1.inout.out_2, ctime(&datos_1.data_time) );
+		if(((strcmp(usuario_1,datos_1.user_name))==0)||((strcmp(usuario_1,"todos"))==0)){
+			printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s", datos_1.user_name, datos_1.inout.in_1, datos_1.inout.in_2, datos_1.inout.in_3, datos_1.inout.in_4, datos_1.inout.out_1, datos_1.inout.out_2, ctime(&datos_1.data_time) );
 
 		}
 	}
