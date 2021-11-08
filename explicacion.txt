@@ -1,0 +1,73 @@
+1_EDU_MAIN.C:
+
+da la bienvenida
+pide el nombre de usuario y lo carga en la estructura en mayusculas
+saluda personalizado y muestra el menu de modos
+enseña como seleccionar si el usuario lo haece mal
+
+----------------------------------------------------------------
+
+3_MODO_EDULAB.C:
+
+muestra un menu con los capitulos del 1 al 4 para educar
+si no elige opcion correcta sigue pidiendo y ademas pregunta si esta seguro de la opcion elegida
+con una opcion valida muestra el apunte correspondiente a estudiar
+y luego indica que debe responder las preguntas formuladas
+da tres opciones a elegir respuesta y una cuarta para salir en cualquier momento
+mientras pregunta felicita o alienta segun sea correcta o falsa
+manda señales por puerto serie al arduino para dar señales luminosas
+ademas va mostrando el progreso de puntaje acumulado en pantalla
+cuando finalizan las 10 preguntas tira un reporte del puntaje alcanzado y guarda en un archivo de texto los creditos.
+en este archivo fuente, defino un arreglo de punteros a char que guardan los nombres de los capitulos. si quiero cambiarlos, debo modificar este arreglo: debi haberlo hecho con un archivo de configuracion (como las preguntas)
+
+-----------------------------------------------------------------
+
+2_IMPLEMENTACIONES.C:
+
+funcion bienvenida: no mas que eso.
+
+funcion despedida: solo dice chau.
+
+funcion instrucciones:
+indica que debe hacer el usuario y pone una pausa al programa
+
+funcion preguntero:
+abre el puerto serie y lo configura y tambien un archivo de texto creditos.txt
+como ya recibe el numero de la leccion elegida, se mete directamente al case correspondiente
+abre el archivo correspondiente con las respuestas y las carga en un arreglo de chares (son 10 respuestas con opcion del 1 al 3)
+entra a un swich anidado para ir cambiando de pregunta con un do wile
+muestra pregunta a pregunta sagazmente con un cat head y tail
+pide la respuesta a la pregunta correspondiente una vez guardada en un arreglo de chares, la compara con el que cargo antes.
+en la misma linea y con un operador ternario, decide si es correcta o falsa y llama a la funcion que le cabe para mandar señal al puerto serie.
+cuando llega a la ultima pregunta, llama a la funcion conclusion que da el reporte del puntaje obtenido en pantalla y ademas lo graba en un archivo de texto con los scores.
+repite esto para las 4 lecciones.
+cierra el archivo e los escores y el del puerto serie
+
+
+funcion correcta:
+
+cuando entra a esta funcion, incrementa el contador de respuestas correctas con el cual luego dara el promedio 
+ahora llama a la funcion parpadio y le manda un char 'g' que es para prender luz green
+luego muestra en pantalla un mensaje de felicitacion por acertar y lo hace de manera pseudoaleatoria.
+
+Funcion falsa: hace lo mismo propiamente pero envia un byte con una 'r' de luz RED.
+
+funcion conclusion:
+toma la hora actual del sistema y la guarda en una estruct time_t
+abre el archivo de creditos en modo agregar
+calcula el promedio de puntaje obtenido y lo imprime en pantalla.
+hace lo mismo pero lo graba con fecha hora nombre y puntaje en el archivo de texto creditos.txt
+da un mensaje en pantalla felicitando o animando al usuario a continuar aprendiendo segun sea aprobado o aplazado respectivaente.
+
+
+Funcion creditos:
+muestra sagazmente con el comando tac el archivo donde se guardaron los puntajes de los usuarios en orden cronologigo y ademas muestra info de la app
+
+-----------------------------------------------------------------
+
+6_INTERFACCE.C
+
+Esta funcion es muy cortita y lo unico que hace es esperar un ratito que se reinicie el puerto serie y luego escribe un byte de color en el puerto para mandarlo a prender una luz al arduino.
+
+
+-----------------------------------------------------------------
