@@ -17,13 +17,15 @@
 
 
 #define TAM_NAME 15               /*notar que algunos son literal de caracter y otros son constantes normales*/
+#define FLAG_DOWN 0
 #define MODO_EDULAB '1'
 #define MODO_TEST '2'
 #define MODO_MINILAB '3'
 #define MODO_CREDITOS '4'
 #define SALIR_DEL_PROGRAMA '5'
-#define RED 'r'
-#define GREEN 'g'
+#define RED 'r'   /*en ascii es un 114 y en binario es 01110010*/
+#define GREEN 'g' /*en ascii es un 103 y en binario es 01100111*/
+#define VOLVER 'v'
 #define BAUDRATE 9600
 
 
@@ -35,21 +37,24 @@
 
 
                     /*Estructura para guardar datos del usuario*/
-struct usuario {
+struct usuario
+{
    time_t data_time;                /*Estructura definida en time.h: guarda la fecha*/
    char user_name[TAM_NAME];        /*Un arreglo de char para guardar el user name*/
-   union{                           /*Una union de */
+   union                            /*Una union de */
+   {
       unsigned char puerto_completo;/*Un byte entero para manejar todo el puerto*/
-      struct{
+      struct
+      {
          unsigned char in_0 : 1;    /*bit a bit para manipular el puerto*/
          unsigned char in_1 : 1;
          unsigned char in_2 : 1;
          unsigned char in_3 : 1;
          unsigned char out_0: 1;
          unsigned char out_1: 1;
-         unsigned char padin: 2;    /*Rellena los espacios vacios para alinear datos: padding*/
-       };
-    }in_out;
+         unsigned char modes: 2;    /*Rellena los espacios vacios para alinear datos: padding*/
+      };
+   }in_out;
 };
 
 typedef struct usuario user_data; /*alias a la estructura usuario*/
