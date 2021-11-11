@@ -81,28 +81,6 @@
       getchar();
       }
 
-        void instruccionesTest(char prueba)
-      {
-      system("clear");
-      printf("\n\n * AHORA OBSERVA LA IMAGEN DE CIRCUITO DE CONECCION #%c.", prueba);
-      printf("\n\n * UNA VEZ REALIZADA LAS CONECCIONES, CERRA LA VENTANA.");
-      printf("\n\n * Y LUEGO, CUANDO ESTES LISTO PARA CONTINUAR, PRESIONA ENTER... ");
-      getchar();
-      }
-
-      void instruccionesTest_2(char prueba)
-      {
-      system("clear");
-      printf("\n\n * IMPORTANTE!!!");       
-      printf("\n\n * RECUERDA REVISAR BIEN LAS CONECCIONES.");
-      printf("\n\n \t * CIRCUITO ESQUEMATICO");
-      printf("\n\n \t * PINES DE CONECCION");
-      printf("\n\n \t * CONECCION A GND (MASA) Y VCC (POSITIVO)");
-      printf("\n\n\n * UNA MALA CONECCION DAÑARA TUS COMPONENTES :(");
-      printf("\n\n * SI ESTAS LISTO, A DARLE (ENTER)... ");
-      getchar();
-      }
-
 
       /*---------------FIN DE LA FUNCION INSTRUCCIONES----------------------------*/
 
@@ -112,7 +90,7 @@
 
       /*--------------FUNCION PREGUNTERO---------------*/
 
-      void preguntero (char leccion, user_data *new_user){
+      void preguntero (char leccion, ptr_user_data new_user){
 
          int num_preg = 1;/*para correr en el switch interno*/
          int i = 0; /*para copiar las respuestas del archivo de config en un arreglo de chares con un for*/
@@ -162,7 +140,7 @@
                               system("cat ./conf/preguntero1.txt | head -n 20 | tail -n 10");/*muestra solo la 2da pregunta*/
                               __fpurge(stdin);
                               (respuestas[num_preg-1] = salir = getchar()) == answers[num_preg-1] ? correcta(&aciertos, new_user, fd) : falsa(new_user, fd);
-                              printf("\n");
+                                    printf("\n");
                            break;
 
                            case PREGUNTA_3:
@@ -608,6 +586,30 @@
 
 
 
+      /*----------------FUNCION PARPADIO--------------------------------------*/
+
+
+
+      void parpadio(const char color, int fd)
+      {
+
+         if(fd < -1)
+         {
+            printf("ERROR al abrir el puerto serie\n");
+
+         }
+
+         write(fd, &color, 1); /*dejo que me lea 1 letras para poder mandar la senial de palpadear*/
+
+      }
+
+
+
+      /*------------------FIN DE LA FUNCION PARPADIO-------------------------*/
+
+
+
+
 
       /*-----------respuestas correctas o falsas--------------*/
       
@@ -755,7 +757,7 @@
       
          printf("\n\n SCORES:\n\n ");
          
-         system("tac ./creditos.txt");/*tac es igual que eun cat pero de abaj para arriba*/
+         system("tac ./creditos.txt | head -n 15");/*tac es igual que eun cat pero de abaj para arriba*/
          
          printf("\n %s, presione una tecla para volver al menu...", new_user -> user_name);
          getchar();getchar();/*si no pongo 2 el muy maldito se come el bufer*/

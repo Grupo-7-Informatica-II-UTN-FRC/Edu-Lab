@@ -8,8 +8,8 @@ SRC = ./src/
 LIB = ./lib
 
 #objetivo primario edulab.app
-edulab.app: 1_edu_main.o 2_implement.o 3_modo_edulab.o 4_modo_test.o 5_modo_minilab.o 6_interface.o
-	$(CC) -I$(INCLUDE) -L$(LIB) -o $@ $(SRC)1_edu_main.c $(SRC)2_implement.c $(SRC)3_modo_edulab.c $(SRC)4_modo_test.c $(SRC)5_modo_minilab.c $(SRC)6_interface.c -ltermset  #$@es lo mismo que edulab.app
+edulab.app: 1_edu_main.o 2_implement.o 3_modo_edulab.o 4_modo_test.o 5_modo_minilab.o termset.o
+	$(CC) -I$(INCLUDE) -L$(LIB) -o $@ $(SRC)1_edu_main.c $(SRC)2_implement.c $(SRC)3_modo_edulab.c $(SRC)4_modo_test.c $(SRC)5_modo_minilab.c $(SRC)termset.c  #$@es lo mismo que edulab.app
 
 
 
@@ -37,9 +37,9 @@ edulab.app: 1_edu_main.o 2_implement.o 3_modo_edulab.o 4_modo_test.o 5_modo_mini
 	$(CC) -I$(INCLUDE) $(CFLAGS) -c $<
 
 
-
-6_interface.o: ./src/6_interface.c ./inc/edulab.h ./inc/termset.h
+termset.o: ./src/termset.c ./inc/termset.h
 	$(CC) -I$(INCLUDE) $(CFLAGS) -c $<
+
 
 
 #objetivo secundario clean todo

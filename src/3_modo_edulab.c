@@ -53,7 +53,7 @@ void modo_edulab(ptr_user_data new_user){ /*fijate como uso el alias ptr_user_da
 
       __fpurge(stdin); /* tira la cadena del stdin para que no joda el getchar*/
    }
-   while(getchar() == 'v'); /*sale del while si no elige Volver "V" "*/
+   while(getchar() == VOLVER); /*sale del while si no elige Volver "v" "*/
 
    switch(leccion)
    {

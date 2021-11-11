@@ -49,7 +49,7 @@ int main(void){
       printf("\n Selecciona el numero del \"MODO DE OPERACION\" que desees ejecutar:\n\n");
 
       do{
-         if(centinela != 0){/*para que el error de ingreso de datos solo salga la primera vez*/
+         if(centinela != FLAG_DOWN){/*para que el error de ingreso de datos solo salga la primera vez*/
             system("clear");
             printf("\n %s! INGRESA UNA OPCION VALIDA DEL MENU (del 1 al 5)\n\n", nuevo_usuario.user_name);/*enseña como usar*/
           }
@@ -61,7 +61,7 @@ int main(void){
          printf("\n\n Tu opcion? --> ");
          scanf(" %c", & modo_elegido); /*este scanf prermite ingresar el modo seleccionado por el usuario*/
 
-         centinela++;
+         centinela++; /*levanta la vandera para que indique las opciones validas*/
        }
       while(modo_elegido < MODO_EDULAB || modo_elegido > SALIR_DEL_PROGRAMA); /* se asegura que sea una opcion valida del 1 al 5*/
 
@@ -70,7 +70,7 @@ int main(void){
          (*funcion_menu[atoi(&modo_elegido) - 1 ])(& nuevo_usuario); /*al atoi hay que pasarle la direccion de la variable o un puntero a ella*/
       }/*aqui es donde se navega por el menu de modos lo hace el arreglo de punteros a funciones*/
 
-      centinela = 0; /*reinicia la bandera para que salte el error de como ingresar la opcion solo cuando ingresa mal*/
+      centinela = FLAG_DOWN; /*reinicia la bandera para que salte el error de como ingresar la opcion solo cuando ingresa mal*/
       }
    while(modo_elegido != SALIR_DEL_PROGRAMA);/*pregunta por el modo toda vez que el usuario no quiera salir de la aplicacion*/
 

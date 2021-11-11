@@ -26,7 +26,7 @@ void leerDatos();//Esta funcion permite al usuario visualizar pruebas anteriores
 void modo_minilab(ptr_user_data new_user){
 	int option = 0;//Variable para seleccionar el menu
 	user_data datos_1;//Creo struct tipo user_data, donde almasenare los datos de usuario, data time y entradas y salidas
-
+	datos_1.in_out.modes = 3;
 
 strcpy(datos_1.user_name, new_user->user_name);
 
@@ -128,7 +128,7 @@ do												//configurando entrada 1
 		//printf("valor de temp = %d",temp);//test
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
-		printf("\n\tCargando valor en in_0\n");
+		//printf("\n\tCargando valor en in_0\n");
 		datos_1.in_out.in_0=temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
@@ -150,7 +150,7 @@ do												//configurando entrada 2
 		//printf("valor de temp = %d",temp);//test
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
-		printf("\n\tCargando valor en in_1\n");
+		//printf("\n\tCargando valor en in_1\n");
 		datos_1.in_out.in_1=temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
@@ -172,7 +172,7 @@ do												//configurando entrada 3
 		//printf("valor de temp = %d",temp);//test
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
-		printf("\n\tCargando valor en in_2\n");
+		//printf("\n\tCargando valor en in_2\n");
 		datos_1.in_out.in_2=temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
@@ -194,7 +194,7 @@ do												//configurando entrada 4
 		//printf("valor de temp = %d",temp);//test
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
-		printf("\n\tCargando valor en in_3\n");
+		//printf("\tCargando valor en in_3\n");
 		datos_1.in_out.in_3=temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
@@ -221,58 +221,43 @@ fd = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_SYNC);		// esto abre y configura
 termset(fd, BAUDRATE, &ttyold, &ttynew);					// puerto serie
          
 if(fd==-1){
-	printf
-	("\n\n\t ERROR AL ABRIR EL PUERTO ttyACM0");
+	printf("\n\n\t ERROR AL ABRIR EL PUERTO ttyACM0");
 }
 
 
 write(fd,&datos_1.in_out.puerto_completo,1);
 printf("\n\tEnviando datos al arduino..");
-
 //system("sleep 1");
 
 read(fd,&datos_1.in_out.puerto_completo,1);
 printf("\n\tRecibiendo datos del arduino..");
-
 //system("sleep 1");
 
 time(&datos_1.data_time);
 
-	//---------------------IMPRIME LOS VALORES QUE INGRESARAN AL ARCHIVO-------------------//
-	printf("\n\n%-12s%-7s%-7s%-7s%-7s%-7s%-7s%-25s\n", "Usuario", "IN 1", "IN 2", "IN 3", "IN 4", "out 1", "out 2","Fecha");
-	printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s", datos_1.user_name, datos_1.in_out.in_0, datos_1.in_out.in_1, datos_1.in_out.in_2, datos_1.in_out.in_3, datos_1.in_out.out_0, datos_1.in_out.out_1, ctime(&datos_1.data_time) );
+//---------------------IMPRIME LOS VALORES QUE INGRESARAN AL ARCHIVO-------------------//
+printf("\n\n%-12s%-7s%-7s%-7s%-7s%-7s%-7s%-25s\n", "Usuario", "IN 1", "IN 2", "IN 3", "IN 4", "out 1", "out 2","Fecha");
+printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s", datos_1.user_name, datos_1.in_out.in_0, datos_1.in_out.in_1, datos_1.in_out.in_2, datos_1.in_out.in_3, datos_1.in_out.out_0, datos_1.in_out.out_1, ctime(&datos_1.data_time) );
 
 
 FILE *ptrf;
-
 if (( ptrf = fopen ("datos.dat","ab"))==NULL){
-
 	printf("\n\tEl archivo no pudo abrirse");
 }
 else{
-
 	printf("\n\tGuardando datos..");
 	fseek(ptrf,0,SEEK_END);									//posiciona el puntero al final
 	fwrite(&datos_1,sizeof(user_data),1,ptrf);				//escribe datos en un archivo
 
 	printf("\n\tCerrando archivo..");
 	fclose (ptrf);											//cierra archivo
-
 }
-
 close(fd);													//Cerrando puerto serie
-
-
 	printf("\n\n Presione enter para continuar");
     __fpurge(stdin);
     getchar();
 	system("clear");
-
 }
-
-
-
-
 
 
 
@@ -285,14 +270,12 @@ system("clear");
 
 int i = 0;
 char usuario_1[15] ;										//usuario a buscar
-user_data datos_1 = {0, "pepe", {0}};							//estructura donde se guarda el archivo
+user_data datos_1 = {0, "pepe", {0}};						//estructura donde se guarda el archivo
 
 printf("\n\n\tHaz seleccionado la opcion Leer");
 printf("\n\tEn esta opcion podras ver los datos almacenados previamente");
 
-
 FILE *ptrf;
-
 
 /*
 //----TEST----//
@@ -300,19 +283,13 @@ printf("\nhi 3\n");
 system("sleep 1");
 */
 
-
-
 if (( ptrf = fopen ("datos.dat","rb"))==NULL){
 	printf("\n\n\tEl archivo no existe o no pudo abrirse");
 }
 else{
-	
 	printf("\n\tIngrese el nombre del usuario que desea ver: ");	
 	while(getchar()!='\n');//espera que se libere el buffer del teclado, mas que todo por el fin de linea
-	scanf("%[^\n]s", usuario_1);					//usuario a buscar
-	
-
-	
+	scanf("%[^\n]s", usuario_1);//usuario a buscar
 	
 	while(usuario_1[i] != '\0') /*me pasa el alias todas a mayuscula hasta que llega al fin de cadena '\0'*/
    {
@@ -320,27 +297,19 @@ else{
       i++;
    }
 
-
-
-
 /*
 	//----TEST----//
 	printf("\nusuario --->%s<---\n\n",usuario_1);	
 	printf("\ndato --->%s<---\n\n",datos_1.user_name);
 */
 
-
-
-
 	while(getchar()!='\n');		
-
 
 	printf("\n%-12s%-7s%-7s%-7s%-7s%-7s%-7s%-25s\n", "Usuario", "IN 1", "IN 2", "IN 3", "IN 4", "out 1", "out 2","Fecha");
 
 	while(!feof(ptrf)){
 	
 		fread( &datos_1,sizeof(user_data),1,ptrf);
-
 
 /*
 //---- TEST ----//
@@ -349,16 +318,12 @@ printf("valor del strcmp:%d\n\n",(strcmp(usuario_1,datos_1.user_name))==0);
 system("sleep 2");
 */
 
-
 		if(((strcmp(usuario_1,datos_1.user_name))==0)||((strcmp(usuario_1,"TODOS"))==0)){
 			printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s", datos_1.user_name, datos_1.in_out.in_0, datos_1.in_out.in_1, datos_1.in_out.in_2, datos_1.in_out.in_3, datos_1.in_out.out_0, datos_1.in_out.out_1, ctime(&datos_1.data_time) );
 		}
 	}
-
 	fclose (ptrf);
-
 }
-
 
 	printf("\n\n Presione enter para continuar");
     __fpurge(stdin);
