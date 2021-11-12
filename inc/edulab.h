@@ -82,6 +82,7 @@ void conclusion(user_data * new_user, int calif, char lecc);
 void correcta(int * const good, user_data * new_user, int file_desc); /*puntero constante a dato no constante*/
 void falsa(user_data * new_user, int file_desc);
 void parpadio (const char color, int file_desc);
+void test(char user_election, ptr_user_data new_user,int fd);
 
         /*------------- FIN DEL PROTOTIPADO DE FUNCIONES -----------------------*/
 
@@ -91,6 +92,7 @@ void parpadio (const char color, int file_desc);
         /*-----------------ENUMERACIONES UTILES-------------------------*/
 
 enum lexion {LECCION_1 = '1', LECCION_2, LECCION_3, LECCION_4};/*recordar que aqui el literal de cadena '1' es un 49 en ascii*/
+enum device {COMPONENT_1 = '1', COMPONENT_2, COMPONENT_3, COMPONENT_4};
 enum question {PREGUNTA_1 = 1, PREGUNTA_2, PREGUNTA_3, PREGUNTA_4, PREGUNTA_5, PREGUNTA_6, PREGUNTA_7, PREGUNTA_8, PREGUNTA_9, PREGUNTA_10};
 
 

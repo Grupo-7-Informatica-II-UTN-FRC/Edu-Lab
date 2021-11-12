@@ -70,7 +70,7 @@
 
 
 
-      /*--------------FUNCION INSTRUCCIONES---------------*/
+      /*--------------FUNCION INSTRUCCIONES EDULAB---------------*/
 
            void instrucciones(char leccion)
       {
@@ -80,7 +80,13 @@
       printf("\n\n * Y LUEGO, CUANDO ESTES LISTO PARA CONTINUAR, PRESIONA ENTER... ");
       getchar();
       }
-         //funciones de modo_test 
+      
+      /*-------------FIN INSTRUCCIONES EDULAB-------------------*/
+      
+      
+      
+      
+     /*-------------INSTRUCCIONES MODO TEST-----------------------------------*/ 
 
         void instruccionesTest(char prueba)
       {
@@ -90,6 +96,13 @@
       printf("\n\n * Y LUEGO, CUANDO ESTES LISTO PARA CONTINUAR, PRESIONA ENTER... ");
       getchar();
       }
+      
+      /*------------FIN INSTRUCCIONES MODO TEST---------------------------*/
+
+
+
+
+      /*---------------INSTRUCCIONES MODO TEST 2------------------------------*/
 
           void instruccionesTest_2(char prueba)
       {
@@ -105,7 +118,7 @@
       }
 
 
-      /*---------------FIN DE LA FUNCION INSTRUCCIONES----------------------------*/
+      /*---------------FIN DE LA FUNCION INSTRUCCIONES MODO TEST 2--------------*/
 
 
 

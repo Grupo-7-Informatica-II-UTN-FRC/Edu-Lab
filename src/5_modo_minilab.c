@@ -28,7 +28,7 @@ void modo_minilab(ptr_user_data new_user){
 	user_data datos_1;//Creo struct tipo user_data, donde almasenare los datos de usuario, data time y entradas y salidas
 	datos_1.in_out.modes = 3;
 
-strcpy(datos_1.user_name, new_user->user_name);
+strcpy(datos_1.user_name, new_user -> user_name); /*copia el nombre del usuario en la struct local*/
 
 
 
@@ -106,6 +106,7 @@ leerDatos();
 void guardarDatos(user_data datos_1){ 				 		//guarda los datos leidos
 
 int temp;
+int fd;
 
 
 system("clear");
@@ -114,14 +115,27 @@ printf("\n\tEl controlador dispone de 4 entradas y dos salidas");
 printf("\n\tPara continuar sera necesario indicar el estado que desea tener en las entradas");
 printf("\n\tUna vez configurada las entradas guardaremos los datos recolectados");
 
+//lo pongo aqui
+fd = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NDELAY);		// esto abre y configura el puerto como de escritura y lectura
+termset(fd, BAUDRATE, &ttyold, &ttynew);					// puerto serie
+
+fflush(stdin);
+
+
+
 
 do												//configurando entrada 1
 {
+/*
+printf("\ndatos puerto padin:%d",datos_1.in_out.padin);
+*/
+
+
 	printf("\n\n\t(Estados: \"0\" o \"1\")");
 	printf("\n\tEntrada Nº 1:");
 
 	while(getchar()!='\n');
-	scanf("%d",&temp);							
+	scanf(" %d",&temp);							
 
 	if ((temp<0)||(temp>1))			//impide que carguen valores erroneos
 	{
@@ -129,7 +143,7 @@ do												//configurando entrada 1
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
 		//printf("\n\tCargando valor en in_0\n");
-		datos_1.in_out.in_0=temp;
+		datos_1.in_out.in_0 = temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
 
@@ -143,7 +157,7 @@ do												//configurando entrada 2
 	printf("\n\tEntrada Nº 2:");
 
 	while(getchar()!='\n');
-	scanf("%d",&temp);							
+	scanf(" %d", &temp);							
 
 	if ((temp<0)||(temp>1))			//impide que carguen valores erroneos
 	{
@@ -151,7 +165,7 @@ do												//configurando entrada 2
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
 		//printf("\n\tCargando valor en in_1\n");
-		datos_1.in_out.in_1=temp;
+		datos_1.in_out.in_1 = temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
 
@@ -165,7 +179,7 @@ do												//configurando entrada 3
 	printf("\n\tEntrada Nº 3:");
 
 	while(getchar()!='\n');
-	scanf("%d",&temp);							
+	scanf(" %d", &temp);							
 
 	if ((temp<0)||(temp>1))			//impide que carguen valores erroneos
 	{
@@ -173,7 +187,7 @@ do												//configurando entrada 3
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
 		//printf("\n\tCargando valor en in_2\n");
-		datos_1.in_out.in_2=temp;
+		datos_1.in_out.in_2 = temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
 
@@ -187,7 +201,7 @@ do												//configurando entrada 4
 	printf("\n\tEntrada Nº 4:");
 
 	while(getchar()!='\n');
-	scanf("%d",&temp);							
+	scanf(" %d", &temp);							
 
 	if ((temp<0)||(temp>1))			//impide que carguen valores erroneos
 	{
@@ -195,7 +209,7 @@ do												//configurando entrada 4
 		printf("\n\tSolo puedes elegir los valores \"0\" o \"1\"");
 	}else{
 		//printf("\tCargando valor en in_3\n");
-		datos_1.in_out.in_3=temp;
+		datos_1.in_out.in_3 = temp;
 	}
 } while ((temp<0)||(temp>1));			//impide que carguen valores erroneos
 
@@ -215,24 +229,32 @@ printf("\ndatos puerto padin:%d",datos_1.in_out.padin);
 
 
 
+//int fd;
 
-int fd;														//descriptor de archivo para el puerto serie 
-fd = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_SYNC);		// esto abre y configura el puerto como de escritura y lectura
-termset(fd, BAUDRATE, &ttyold, &ttynew);					// puerto serie
-         
-if(fd==-1){
+        // fd = open("/dev/ttyACM0", O_WRONLY | O_NOCTTY | O_SYNC); /*esto abre y configura el puerto como de escritura*/
+        // termset(fd, BAUDRATE, &ttyold, &ttynew);/*esto configura otras yerbas del puerto serie como la velocidad de transm*/
+														//descriptor de archivo para el puerto serie 
+
+
+//lo saque de aqui
+
+
+
+if(fd == -1){
 	printf("\n\n\t ERROR AL ABRIR EL PUERTO ttyACM0");
-}else{
+}
+else{
 
-write(fd,&datos_1.in_out.puerto_completo,1);
-printf("\n\tEnviando datos al arduino..");
-//system("sleep 1");
+   write(fd, &datos_1.in_out.puerto_completo, 1);
+   printf("\n\tEnviando datos al arduino..");
+   //system("sleep 1");
 
-read(fd,&datos_1.in_out.puerto_completo,1);
-printf("\n\tRecibiendo datos del arduino..");
-//system("sleep 1");
 
-time(&datos_1.data_time);
+   read(fd, &datos_1.in_out.puerto_completo, 1);
+   printf("\n\tRecibiendo datos del arduino..");
+   //system("sleep 1");
+
+   time(&datos_1.data_time);
 
 //---------------------IMPRIME LOS VALORES QUE INGRESARAN AL ARCHIVO-------------------//
 printf("\n\n%-12s%-7s%-7s%-7s%-7s%-7s%-7s%-25s\n", "Usuario", "IN 1", "IN 2", "IN 3", "IN 4", "out 1", "out 2","Fecha");

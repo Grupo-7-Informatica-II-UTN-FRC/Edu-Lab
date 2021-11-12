@@ -56,3 +56,6 @@
  Wednesday, 10 November 2021 - 02:11:48 --->   1:   80.00 puntos - Leccion 1.
  Wednesday, 10 November 2021 - 03:27:59 --->   HORACIO:   80.00 puntos - Leccion 1.
  Wednesday, 10 November 2021 - 04:23:40 --->   MARIANO:   80.00 puntos - Leccion 1.
+ Thursday, 11 November 2021 - 23:53:17 --->   NICO:   30.00 puntos - Leccion 3.
+ Thursday, 11 November 2021 - 23:55:40 --->   NICANDRO:   80.00 puntos - Leccion 4.
+ Friday, 12 November 2021 - 06:45:36 --->   GEO:   90.00 puntos - Leccion 1.
