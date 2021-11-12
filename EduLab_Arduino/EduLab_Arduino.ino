@@ -129,9 +129,53 @@ void loop()
          case TEST:
 
          lcd.clear();
-         lcd.setCursor(3, 0);    // ubica cursor en columna 0 y linea 0
-         lcd.print("MODO TEST");  // escribe el texto
-         delay(3000);
+         lcd.setCursor(0, 0);    // ubica cursor en columna 0 y linea 0
+         lcd.print("   MODO TEST");  // escribe el texto 
+         delay(1000);
+         lcd.setCursor(0, 1);    // ubica cursor en columna 3 y linea 1
+         lcd.print("Probando comp..");  // escribe el texto 
+         delay(1000);
+
+         digitalWrite(entrada_1,option.in_0);
+         digitalWrite(entrada_2,option.in_1);
+         digitalWrite(entrada_3,option.in_2);
+         digitalWrite(entrada_4,option.in_3);
+         option.out_0 = digitalRead(salida_1);
+         option.out_1 = digitalRead(salida_2);
+
+         Serial.write(option.puerto_completo);
+         
+         lcd.clear();
+         lcd.setCursor(0, 0);    // ubica cursor en columna 0 y linea 0
+         lcd.print("   MODO TEST");  // escribe el texto 
+         lcd.setCursor(0, 1);    // ubica cursor en columna 0 y linea 1
+         lcd.print("Transmitiendo..");  // escribe el texto 
+         delay(1500);
+
+         lcd.clear();
+         lcd.setCursor(0, 0);    // ubica cursor en columna 0 y linea 0
+         lcd.print("   MODO TEST");  // escribe el texto 
+         lcd.setCursor(0, 1);    // ubica cursor en columna 0 y linea 1
+         lcd.print("Transmitiendo..");  // escribe el texto 
+         delay(1500);
+
+         lcd.clear();
+         lcd.setCursor(0, 0);    // ubica cursor en columna 0 y linea 0
+         lcd.print("I1 I2 I3 I4  1 2");  // escribe el texto 
+         lcd.setCursor(0, 1);    // ubica cursor en columna 0 y linea 1
+         lcd.print(option.in_0); // escribe el texto
+         lcd.setCursor(3, 1);    // ubica cursor en columna 3 y linea 1
+         lcd.print(option.in_1); // escribe el texto         
+         lcd.setCursor(6, 1);    // ubica cursor en columna 6 y linea 1
+         lcd.print(option.in_2); // escribe el texto         
+         lcd.setCursor(9, 1);    // ubica cursor en columna 9 y linea 1
+         lcd.print(option.in_3);  // escribe el texto         
+         lcd.setCursor(13, 1);    // ubica cursor en columna 13 y linea 1
+         lcd.print(option.out_0);  // escribe el texto
+         lcd.setCursor(15, 1);    // ubica cursor en columna 15 y linea 1
+         lcd.print(option.out_1);  // escribe el texto 
+         delay(6000);
+                  
          flag = 0;
          
          break;

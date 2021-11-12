@@ -70,14 +70,20 @@ void modo_test(ptr_user_data new_user){ /*fijate como uso el alias ptr_user_data
     fd = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_NDELAY);// esto abre y configura el puerto como de escritura y lectura
     termset(fd, BAUDRATE, &ttyold, &ttynew);// configura el puerto serie
     __fpurge(stdin); /* tira la cadena del stdin para que no joda el getchar*/
-
-
+    fflush(stdin);
+    getchar();
+    
+    
    switch(user_election)
    {
       case COMPONENT_1:
          system("xdg-open ./conf/componente_1.pdf &"); /*dispara el apunte 1 en el lector de pdf predeterminado & para ejecucuin en segundo plano*/
          instruccionesTest(user_election); /*indica por pantalla como proceder*/
          instruccionesTest_2(user_election);
+         
+    __fpurge(stdin); /* tira la cadena del stdin para que no joda el getchar*/
+    fflush(stdin);         
+         
          test(user_election, new_user, fd); // ejecuta la prueba de circuito integrado elegido.
       break;
 
@@ -131,30 +137,32 @@ void modo_test(ptr_user_data new_user){ /*fijate como uso el alias ptr_user_data
     //fd = open("/dev/ttyACM0", O_RDWR | O_NOCTTY | O_SYNC);// esto abre y configura el puerto como de escritura y lectura
    // termset(fd, BAUDRATE, &ttyold, &ttynew);// configura el puerto serie
          
-    if(fd==-1){
+    if(fd < -1){
 	    printf("\n\n\t ERROR AL ABRIR EL PUERTO ttyACM0");
     }
     else
     {
        /*aqui iria el suich para cada comportamiento*/
-       if((comp_ptr = fopen("./conf/comportamiento_1.txt","r")) == NULL)/*en caso que no pueda abrir el archivo de las respuestas correctas*/
+       if((comp_ptr = fopen("./conf/comportamiento_2.txt","r")) == NULL)/*en caso que no pueda abrir el archivo de las respuestas correctas*/
        {
           printf("\n ERROR AL ABRIR EL ARCHIVO DE COMPORTAMIENTO 1");
        }
        else
        {
-          while(!feof(comp_ptr))
+          for(i = 0 ; i < 4 ; i++)
           {
-             fscanf(comp_ptr, "%lc", resp_al_impulso + i);/*carg las respuestas del archivo de conf comportamiento_x en un arreglo de int*/
-             i++;
+             fscanf(comp_ptr, "%lc", (resp_al_impulso + i));/*carg las respuestas del archivo de conf comportamiento_x en un arreglo de int*/
+             printf("\nresp al inp: %ls", resp_al_impulso + i);
           }
        }
        fclose(comp_ptr);
+       
+       
        for(estimulo = 0; estimulo < 4; estimulo++)
        {
           new_user -> in_out . puerto_completo = estimulo << 2;/*pone en la entrada_3 y 4 de la union cada una de las combinaciones*/
                                                                /*XX-XX00-XX, XX-XX01-XX, XX-XX10-XX, XX-XX11-XX*/
-          new_user -> in_out . modes = TEST << 6 ;/*me configura el byte a enviar con key MODO_TEST = 10XX-XXXX* see line 18*/
+          new_user -> in_out . modes = TEST ;/*me configura el byte a enviar con key MODO_TEST = 10XX-XXXX* see line 18*/
           
           write(fd, &new_user -> in_out . puerto_completo, 1);/*fijate que apunta con operador flecha pero despues entra con
                                                                 operador punto. esta linea escribe en el ttyACM0*/
@@ -164,14 +172,17 @@ void modo_test(ptr_user_data new_user){ /*fijate como uso el alias ptr_user_data
           printf("\n\tRecibiendo datos del arduino..");
 
           printf("\n\n%-20s%-7s%-7s%-7s", "COMPONENTE", "IN 1", "IN 2", "out 1");
-          printf("%-20s%-7d%-7d%-7d", compuerta[atoi(&user_election)], new_user -> in_out.in_2, new_user -> in_out . in_3, new_user -> in_out.out_1);
+          printf("\n%-20s%-7d%-7d%-7d", compuerta[atoi(&user_election)], new_user -> in_out.in_2, new_user -> in_out . in_3, new_user -> in_out.out_1);
           
           
-          if(resp_al_impulso[estimulo] == new_user -> in_out . out_1)
+          if(resp_al_impulso[estimulo] - '0' == new_user -> in_out . out_1 )
              flag_operativa++;
        }
-       
+       printf("flag_operativa es: %d", flag_operativa);/*para debuhigar*/
        flag_operativa == 4 ? printf("\n COMPONENTE OPERATIVO") : printf("\n COMPONENTE DEFECTUOSO O MAL CONECTADO");
     }
        close(fd);
+       
+       printf("\n enter para salir");
+       getchar();
  }
