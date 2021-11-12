@@ -222,8 +222,7 @@ termset(fd, BAUDRATE, &ttyold, &ttynew);					// puerto serie
          
 if(fd==-1){
 	printf("\n\n\t ERROR AL ABRIR EL PUERTO ttyACM0");
-}
-
+}else{
 
 write(fd,&datos_1.in_out.puerto_completo,1);
 printf("\n\tEnviando datos al arduino..");
@@ -253,6 +252,11 @@ else{
 	fclose (ptrf);											//cierra archivo
 }
 close(fd);													//Cerrando puerto serie
+
+
+}
+
+
 	printf("\n\n Presione enter para continuar");
     __fpurge(stdin);
     getchar();
