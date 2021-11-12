@@ -65,9 +65,3 @@ muestra sagazmente con el comando tac el archivo donde se guardaron los puntajes
 
 -----------------------------------------------------------------
 
-6_INTERFACCE.C
-
-Esta funcion es muy cortita y lo unico que hace es esperar un ratito que se reinicie el puerto serie y luego escribe un byte de color en el puerto para mandarlo a prender una luz al arduino.
-
-
------------------------------------------------------------------
