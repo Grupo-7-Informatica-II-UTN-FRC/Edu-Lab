@@ -80,6 +80,29 @@
       printf("\n\n * Y LUEGO, CUANDO ESTES LISTO PARA CONTINUAR, PRESIONA ENTER... ");
       getchar();
       }
+         //funciones de modo_test 
+
+        void instruccionesTest(char prueba)
+      {
+      system("clear");
+      printf("\n\n * AHORA OBSERVA LA IMAGEN DE CIRCUITO DE CONECCION #%c.", prueba);
+      printf("\n\n * UNA VEZ REALIZADA LAS CONECCIONES, CERRA LA VENTANA.");
+      printf("\n\n * Y LUEGO, CUANDO ESTES LISTO PARA CONTINUAR, PRESIONA ENTER... ");
+      getchar();
+      }
+
+          void instruccionesTest_2(char prueba)
+      {
+      system("clear");
+      printf("\n\n * IMPORTANTE!!!");       
+      printf("\n\n * RECUERDA REVISAR BIEN LAS CONECCIONES.");
+      printf("\n\n \t * CIRCUITO ESQUEMATICO");
+      printf("\n\n \t * PINES DE CONECCION");
+      printf("\n\n \t * CONECCION A GND (MASA) Y VCC (POSITIVO)");
+      printf("\n\n\n * UNA MALA CONECCION DAÑARA TUS COMPONENTES :(");
+      printf("\n\n * SI ESTAS LISTO, A DARLE (ENTER)... ");
+      getchar();
+      }
 
 
       /*---------------FIN DE LA FUNCION INSTRUCCIONES----------------------------*/
