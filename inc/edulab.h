@@ -75,6 +75,8 @@ void modo_test(ptr_user_data new_user);
 void modo_minilab(ptr_user_data new_user);
 void modo_creditos(ptr_user_data new_user);
 void instrucciones(char);
+void instruccionesTest(char);
+void instruccionesTest_2(char);
 void preguntero(char, user_data * new_user);
 void conclusion(user_data * new_user, int calif, char lecc);
 void correcta(int * const good, user_data * new_user, int file_desc); /*puntero constante a dato no constante*/
