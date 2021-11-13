@@ -58,11 +58,11 @@ printf("\ndatos puerto padin:%d",datos_1.in_out.mode);
 
 printf("\n\n%-20s%-30s ","Opciones","Descripcion");
 
-printf("\n%-20s%-30s ","1. Guardar","Guarda los datos obtenidos de la placa de desaarrollo");
+printf("\n%-20s%-30s ","1. Guardar","Guardar los datos obtenidos de la placa de desarrollo");
 
-printf("\n%-20s%-30s ","2. Leer","Lee Los datos previamente guardados");
+printf("\n%-20s%-30s ","2. Leer","Leer Los datos previamente guardados");
 
-printf("\n%-20s%-30s ","3. Salir","Volver al menu principar");
+printf("\n%-20s%-30s ","3. Salir","Volver al menu principal");
 
 printf("\n\n\t--> ");
 scanf("%d",&option);
@@ -245,10 +245,11 @@ void leerDatos(){//lee los datos guardados
 	while(!feof(ptrf)){//mientras no termine el archivo
 	
 		fread( &datos_1,sizeof(user_data),1,ptrf);//Guarda datos del archivo en la struct
-
+	if(!feof(ptrf)){
 		if(((strcmp(usuario_1,datos_1.user_name))==0)||((strcmp(usuario_1,"TODOS"))==0)){//compara para imprimir los solicitados
 			printf("%-12s%-7d%-7d%-7d%-7d%-7d%-7d%-25s", datos_1.user_name, datos_1.in_out.in_0, datos_1.in_out.in_1, datos_1.in_out.in_2, datos_1.in_out.in_3, datos_1.in_out.out_0, datos_1.in_out.out_1, ctime(&datos_1.data_time) );
 		}
+	}
 	}
 	fclose (ptrf);//cierra el archivo
 }
