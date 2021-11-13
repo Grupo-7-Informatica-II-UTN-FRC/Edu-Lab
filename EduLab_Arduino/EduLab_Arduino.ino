@@ -44,7 +44,7 @@ byte_recibido option = {EN_ESPERA}; //define una variable de tipo union serial_p
 
 LiquidCrystal_I2C lcd (0x27, 2, 1, 0, 4, 5, 6, 7); // DIR, E, RW, RS, D4, D5, D6, D7
 
-
+ 
 //-------------------------------setup----------------------------------------------
 void setup()
 {
@@ -185,9 +185,6 @@ void loop()
          lcd.setCursor(0, 0);    // ubica cursor en columna 0 y linea 0
          lcd.print("   MODO MINILAB");  // escribe el texto 
          delay(1000);
-         lcd.setCursor(0, 1);    // ubica cursor en columna 3 y linea 1
-         lcd.print("Probando comp..");  // escribe el texto 
-         delay(1000);
 
          digitalWrite(entrada_1,option.in_0);
          digitalWrite(entrada_2,option.in_1);
@@ -196,15 +193,16 @@ void loop()
          option.out_0 = digitalRead(salida_1);
          option.out_1 = digitalRead(salida_2);
 
-         Serial.write(option.puerto_completo);
-         
          lcd.clear();
          lcd.setCursor(0, 0);    // ubica cursor en columna 0 y linea 0
          lcd.print("   MODO MINILAB");  // escribe el texto 
-         lcd.setCursor(0, 1);    // ubica cursor en columna 0 y linea 1
-         lcd.print("Transmitiendo..");  // escribe el texto 
+         //delay(1000);
+         lcd.setCursor(0, 1);    // ubica cursor en columna 3 y linea 1
+         lcd.print("Probando comp..");  // escribe el texto 
          delay(1500);
-
+         
+         Serial.write(option.puerto_completo);
+         
          lcd.clear();
          lcd.setCursor(0, 0);    // ubica cursor en columna 0 y linea 0
          lcd.print("   MODO MINILAB");  // escribe el texto 
@@ -227,9 +225,13 @@ void loop()
          lcd.print(option.out_0);  // escribe el texto
          lcd.setCursor(15, 1);    // ubica cursor en columna 15 y linea 1
          lcd.print(option.out_1);  // escribe el texto 
-         delay(6000);
+         delay(5000);
                   
          flag = 0;
+         digitalWrite(entrada_1,LOW);
+         digitalWrite(entrada_2,LOW);
+         digitalWrite(entrada_3,LOW);
+         digitalWrite(entrada_4,LOW);
          break;
       }   
       delay(10);
