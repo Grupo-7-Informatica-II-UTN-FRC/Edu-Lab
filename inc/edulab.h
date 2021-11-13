@@ -82,7 +82,7 @@ void conclusion(user_data * new_user, int calif, char lecc);
 void correcta(int * const good, user_data * new_user, int file_desc); /*puntero constante a dato no constante*/
 void falsa(user_data * new_user, int file_desc);
 void parpadio (const char color, int file_desc);
-void test(char user_election, ptr_user_data new_user,int fd);
+void testiando(char user_election, ptr_user_data new_user,int fd);
 
         /*------------- FIN DEL PROTOTIPADO DE FUNCIONES -----------------------*/
 
